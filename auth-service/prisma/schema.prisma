@@ -1,0 +1,142 @@
+// auth-service/prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@prisma/auth-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("AUTH_DATABASE_URL")
+}
+
+// User Authentication Model
+model User {
+  id                String    @id @default(uuid()) @db.Uuid
+  email             String    @unique
+  password_hash     String    @map("password_hash")
+  email_verified    Boolean   @default(false) @map("email_verified")
+  email_verified_at DateTime? @map("email_verified_at")
+  
+  // Account status
+  status            UserStatus @default(ACTIVE)
+  locked_until      DateTime?  @map("locked_until")
+  failed_login_attempts Int    @default(0) @map("failed_login_attempts")
+  
+  // Timestamps
+  created_at        DateTime  @default(now()) @map("created_at")
+  updated_at        DateTime  @updatedAt @map("updated_at")
+  last_login_at     DateTime? @map("last_login_at")
+  
+  // Relations
+  refresh_tokens    RefreshToken[]
+  password_resets   PasswordReset[]
+  user_sessions     UserSession[]
+  
+  @@map("users")
+}
+
+// Refresh Token Management
+model RefreshToken {
+  id            String    @id @default(uuid()) @db.Uuid
+  user_id       String    @map("user_id") @db.Uuid
+  token_hash    String    @unique @map("token_hash")
+  expires_at    DateTime  @map("expires_at")
+  revoked       Boolean   @default(false)
+  revoked_at    DateTime? @map("revoked_at")
+  
+  // Device/Client information
+  device_id     String?   @map("device_id")
+  user_agent    String?   @map("user_agent")
+  ip_address    String?   @map("ip_address")
+  
+  created_at    DateTime  @default(now()) @map("created_at")
+  
+  // Relations
+  user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  
+  @@map("refresh_tokens")
+  @@index([user_id])
+  @@index([expires_at])
+}
+
+// Password Reset Tokens
+model PasswordReset {
+  id            String    @id @default(uuid()) @db.Uuid
+  user_id       String    @map("user_id") @db.Uuid
+  token_hash    String    @unique @map("token_hash")
+  expires_at    DateTime  @map("expires_at")
+  used          Boolean   @default(false)
+  used_at       DateTime? @map("used_at")
+  
+  // Request information
+  ip_address    String?   @map("ip_address")
+  user_agent    String?   @map("user_agent")
+  
+  created_at    DateTime  @default(now()) @map("created_at")
+  
+  // Relations
+  user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  
+  @@map("password_resets")
+  @@index([user_id])
+  @@index([expires_at])
+}
+
+// User Sessions for tracking active sessions
+model UserSession {
+  id            String    @id @default(uuid()) @db.Uuid
+  user_id       String    @map("user_id") @db.Uuid
+  session_token String    @unique @map("session_token")
+  
+  // Session information
+  ip_address    String?   @map("ip_address")
+  user_agent    String?   @map("user_agent")
+  device_id     String?   @map("device_id")
+  
+  // Session status
+  is_active     Boolean   @default(true) @map("is_active")
+  expires_at    DateTime  @map("expires_at")
+  last_activity DateTime  @default(now()) @map("last_activity")
+  
+  created_at    DateTime  @default(now()) @map("created_at")
+  ended_at      DateTime? @map("ended_at")
+  
+  // Relations
+  user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  
+  @@map("user_sessions")
+  @@index([user_id])
+  @@index([expires_at])
+  @@index([is_active])
+}
+
+// Email Verification Tokens
+model EmailVerification {
+  id            String    @id @default(uuid()) @db.Uuid
+  email         String
+  token_hash    String    @unique @map("token_hash")
+  expires_at    DateTime  @map("expires_at")
+  verified      Boolean   @default(false)
+  verified_at   DateTime? @map("verified_at")
+  
+  // Request information
+  ip_address    String?   @map("ip_address")
+  user_agent    String?   @map("user_agent")
+  
+  created_at    DateTime  @default(now()) @map("created_at")
+  
+  @@map("email_verifications")
+  @@index([email])
+  @@index([expires_at])
+}
+
+// Enums
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  PENDING_VERIFICATION
+  
+  @@map("user_status")
+}
+

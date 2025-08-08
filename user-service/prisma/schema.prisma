@@ -1,0 +1,177 @@
+// user-service/prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@prisma/user-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("USER_DATABASE_URL")
+}
+
+// Main User Profile Model
+model User {
+  id                String    @id @default(uuid()) @db.Uuid
+  email             String    @unique
+  username          String?   @unique
+  first_name        String    @map("first_name")
+  last_name         String    @map("last_name")
+  
+  // Role and Organization
+  role              UserRole  @default(LEARNER)
+  organization_id   String    @map("organization_id") @db.Uuid
+  subscription_id   String?   @map("subscription_id") @db.Uuid
+  
+  // Account Status
+  status            UserStatus @default(ACTIVE)
+  
+  // Timestamps
+  created_at        DateTime  @default(now()) @map("created_at")
+  updated_at        DateTime  @updatedAt @map("updated_at")
+  last_login        DateTime? @map("last_login")
+  
+  // Relations
+  profile           UserProfile?
+  learning_preferences LearningPreferences?
+  learning_stats    LearningStats?
+  
+  @@map("users")
+  @@index([organization_id])
+  @@index([role])
+  @@index([status])
+  @@index([email])
+}
+
+// User Profile Data
+model UserProfile {
+  id              String    @id @default(uuid()) @db.Uuid
+  user_id         String    @unique @map("user_id") @db.Uuid
+  
+  // Profile Information
+  avatar_url      String?   @map("avatar_url")
+  bio             String?   @db.Text
+  timezone        String    @default("UTC")
+  language        String    @default("en")
+  
+  // Personal Information
+  phone_number    String?   @map("phone_number")
+  date_of_birth   DateTime? @map("date_of_birth") @db.Date
+  
+  // Address Information
+  address_line1   String?   @map("address_line1")
+  city            String?
+  country         String?
+  
+  // Privacy Settings
+  profile_visibility ProfileVisibility @default(ORGANIZATION) @map("profile_visibility")
+  show_email      Boolean   @default(false) @map("show_email")
+  
+  created_at      DateTime  @default(now()) @map("created_at")
+  updated_at      DateTime  @updatedAt @map("updated_at")
+  
+  // Relations
+  user            User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  
+  @@map("user_profiles")
+}
+
+// Learning Preferences and Style
+model LearningPreferences {
+  id                    String    @id @default(uuid()) @db.Uuid
+  user_id               String    @unique @map("user_id") @db.Uuid
+  
+  // Learning Style Scores (0.0 to 1.0)
+  visual_score          Float     @default(0.5) @map("visual_score")
+  auditory_score        Float     @default(0.5) @map("auditory_score")
+  reading_score         Float     @default(0.5) @map("reading_score")
+  kinesthetic_score     Float     @default(0.5) @map("kinesthetic_score")
+  
+  // Content Preferences
+  preferred_content_types String[] @map("preferred_content_types")
+  difficulty_preference DifficultyLevel @default(INTERMEDIATE) @map("difficulty_preference")
+  pace_preference       PacePreference @default(MODERATE) @map("pace_preference")
+  
+  created_at            DateTime  @default(now()) @map("created_at")
+  updated_at            DateTime  @updatedAt @map("updated_at")
+  
+  // Relations
+  user                  User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  
+  @@map("learning_preferences")
+}
+
+// Learning Statistics and Analytics
+model LearningStats {
+  id                      String    @id @default(uuid()) @db.Uuid
+  user_id                 String    @unique @map("user_id") @db.Uuid
+  
+  // Course Statistics
+  total_courses_enrolled  Int       @default(0) @map("total_courses_enrolled")
+  courses_completed       Int       @default(0) @map("courses_completed")
+  courses_in_progress     Int       @default(0) @map("courses_in_progress")
+  
+  // Time Statistics (in minutes)
+  total_learning_time     Int       @default(0) @map("total_learning_time")
+  this_week_learning_time Int       @default(0) @map("this_week_learning_time")
+  
+  // Performance Statistics
+  average_score           Float?    @map("average_score")
+  total_assessments_taken Int       @default(0) @map("total_assessments_taken")
+  
+  // Activity Tracking
+  last_activity           DateTime? @map("last_activity")
+  
+  created_at              DateTime  @default(now()) @map("created_at")
+  updated_at              DateTime  @updatedAt @map("updated_at")
+  
+  // Relations
+  user                    User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  
+  @@map("learning_stats")
+}
+
+// Enums
+enum UserRole {
+  SUPER_ADMIN
+  ORG_ADMIN
+  INSTRUCTOR
+  LEARNER
+  
+  @@map("user_role")
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  PENDING
+  
+  @@map("user_status")
+}
+
+enum ProfileVisibility {
+  PUBLIC
+  ORGANIZATION
+  PRIVATE
+  
+  @@map("profile_visibility")
+}
+
+enum DifficultyLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+  
+  @@map("difficulty_level")
+}
+
+enum PacePreference {
+  SLOW
+  MODERATE
+  FAST
+  SELF_PACED
+  
+  @@map("pace_preference")
+}
+
