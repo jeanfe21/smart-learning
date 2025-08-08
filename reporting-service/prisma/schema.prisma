@@ -1,0 +1,292 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@prisma/reporting_client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("REPORTING_SERVICE_DATABASE_URL")
+}
+
+model Report {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  type        ReportType
+  category    ReportCategory
+  
+  // Configuration
+  query       Json     // Report query configuration
+  parameters  Json?    // Report parameters
+  schedule    Json?    // Scheduling configuration
+  
+  // Access control
+  isPublic    Boolean  @default(false)
+  permissions Json?    // User/role permissions
+  
+  // Relationships
+  organizationId String
+  creatorId      String
+  
+  // Generated reports
+  reportRuns     ReportRun[]
+  
+  // Metadata
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  
+  @@map("reports")
+}
+
+model ReportRun {
+  id          String   @id @default(cuid())
+  status      RunStatus @default(PENDING)
+  
+  // Execution
+  startedAt   DateTime?
+  completedAt DateTime?
+  duration    Int?     // in seconds
+  
+  // Parameters
+  parameters  Json?    // Runtime parameters
+  
+  // Results
+  resultData  Json?    // Report data
+  resultUrl   String?  // URL to generated file
+  format      ReportFormat
+  
+  // Error handling
+  errorMessage String?
+  
+  // Relationships
+  reportId    String
+  report      Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  requestedBy String   // User ID
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("report_runs")
+}
+
+model Dashboard {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  layout      Json     // Dashboard layout configuration
+  
+  // Access control
+  isPublic    Boolean  @default(false)
+  permissions Json?    // User/role permissions
+  
+  // Relationships
+  organizationId String
+  creatorId      String
+  
+  // Widgets
+  widgets     DashboardWidget[]
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("dashboards")
+}
+
+model DashboardWidget {
+  id          String   @id @default(cuid())
+  title       String
+  type        WidgetType
+  size        WidgetSize
+  position    Json     // x, y, width, height
+  
+  // Configuration
+  config      Json     // Widget-specific configuration
+  dataSource  Json     // Data source configuration
+  
+  // Relationships
+  dashboardId String
+  dashboard   Dashboard @relation(fields: [dashboardId], references: [id], onDelete: Cascade)
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("dashboard_widgets")
+}
+
+model AnalyticsEvent {
+  id          String   @id @default(cuid())
+  eventType   String
+  eventName   String
+  
+  // Event data
+  properties  Json?    // Event properties
+  userId      String?
+  sessionId   String?
+  
+  // Context
+  organizationId String?
+  courseId       String?
+  lessonId       String?
+  
+  // Technical details
+  userAgent   String?
+  ipAddress   String?
+  referrer    String?
+  
+  // Timestamp
+  timestamp   DateTime @default(now())
+  
+  @@index([eventType, eventName])
+  @@index([userId])
+  @@index([timestamp])
+  @@map("analytics_events")
+}
+
+model MetricSnapshot {
+  id          String   @id @default(cuid())
+  metricName  String
+  metricType  MetricType
+  value       Float
+  
+  // Dimensions
+  dimensions  Json?    // Metric dimensions (e.g., course_id, user_id)
+  
+  // Time period
+  period      TimePeriod
+  periodStart DateTime
+  periodEnd   DateTime
+  
+  // Relationships
+  organizationId String?
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  
+  @@unique([metricName, period, periodStart, organizationId])
+  @@index([metricName, period])
+  @@map("metric_snapshots")
+}
+
+model UserActivity {
+  id          String   @id @default(cuid())
+  userId      String
+  activityType ActivityType
+  
+  // Activity details
+  resourceType String?  // course, lesson, assessment, etc.
+  resourceId   String?
+  action       String   // viewed, completed, started, etc.
+  
+  // Context
+  organizationId String?
+  sessionId      String?
+  
+  // Metadata
+  metadata    Json?
+  timestamp   DateTime @default(now())
+  
+  @@index([userId, timestamp])
+  @@index([activityType, timestamp])
+  @@map("user_activities")
+}
+
+model SystemMetric {
+  id          String   @id @default(cuid())
+  metricName  String
+  value       Float
+  unit        String?
+  
+  // System context
+  service     String?  // Service name
+  instance    String?  // Instance identifier
+  
+  // Metadata
+  tags        Json?    // Additional tags
+  timestamp   DateTime @default(now())
+  
+  @@index([metricName, timestamp])
+  @@map("system_metrics")
+}
+
+enum ReportType {
+  TABULAR
+  CHART
+  DASHBOARD
+  EXPORT
+}
+
+enum ReportCategory {
+  USER_ANALYTICS
+  COURSE_ANALYTICS
+  LEARNING_PROGRESS
+  ASSESSMENT_RESULTS
+  ENGAGEMENT_METRICS
+  FINANCIAL_REPORTS
+  SYSTEM_REPORTS
+}
+
+enum RunStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum ReportFormat {
+  JSON
+  CSV
+  EXCEL
+  PDF
+  HTML
+}
+
+enum WidgetType {
+  CHART_LINE
+  CHART_BAR
+  CHART_PIE
+  CHART_AREA
+  TABLE
+  METRIC
+  PROGRESS
+  LIST
+}
+
+enum WidgetSize {
+  SMALL
+  MEDIUM
+  LARGE
+  EXTRA_LARGE
+}
+
+enum MetricType {
+  COUNTER
+  GAUGE
+  HISTOGRAM
+  SUMMARY
+}
+
+enum TimePeriod {
+  HOUR
+  DAY
+  WEEK
+  MONTH
+  QUARTER
+  YEAR
+}
+
+enum ActivityType {
+  LOGIN
+  LOGOUT
+  COURSE_VIEW
+  LESSON_VIEW
+  LESSON_COMPLETE
+  ASSESSMENT_START
+  ASSESSMENT_COMPLETE
+  DOWNLOAD
+  SEARCH
+  PROFILE_UPDATE
+}

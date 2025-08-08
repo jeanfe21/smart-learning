@@ -40,7 +40,13 @@
         "apps/api-gateway-e2e/**/*",
         "auth-service-e2e/**/*",
         "user-service-e2e/**/*",
-        "organization-service-e2e/**/*"
+        "organization-service-e2e/**/*",
+        "content-service-e2e/**/*",
+        "learning-progress-service-e2e/**/*",
+        "assessment-service-e2e/**/*",
+        "notification-service-e2e/**/*",
+        "reporting-service-e2e/**/*",
+        "subscription-service-e2e/**/*"
       ]
     }
   ],

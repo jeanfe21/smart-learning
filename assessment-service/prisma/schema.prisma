@@ -1,0 +1,227 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@prisma/assessment_client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("ASSESSMENT_SERVICE_DATABASE_URL")
+}
+
+model Assessment {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        AssessmentType
+  difficulty  DifficultyLevel
+  
+  // Configuration
+  timeLimit   Int?     // in minutes
+  passingScore Float   @default(70) // 0-100
+  maxAttempts Int      @default(3)
+  isRandomized Boolean @default(false)
+  showResults Boolean  @default(true)
+  
+  // Relationships
+  organizationId String
+  creatorId      String
+  courseId       String?
+  
+  // Content
+  questions   Question[]
+  attempts    AssessmentAttempt[]
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  publishedAt DateTime?
+  
+  @@map("assessments")
+}
+
+model Question {
+  id          String   @id @default(cuid())
+  title       String
+  content     String   // Question text
+  type        QuestionType
+  points      Float    @default(1)
+  order       Int
+  
+  // Configuration
+  options     Json?    // For multiple choice questions
+  correctAnswer Json   // Correct answer(s)
+  explanation String?
+  
+  // Relationships
+  assessmentId String
+  assessment  Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  
+  // Responses
+  responses   QuestionResponse[]
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("questions")
+}
+
+model AssessmentAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  status      AttemptStatus @default(IN_PROGRESS)
+  score       Float?   // 0-100
+  
+  // Time tracking
+  startedAt   DateTime @default(now())
+  submittedAt DateTime?
+  timeSpent   Int?     // in minutes
+  
+  // Relationships
+  assessmentId String
+  assessment  Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
+  
+  // Responses
+  responses   QuestionResponse[]
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("assessment_attempts")
+}
+
+model QuestionResponse {
+  id          String   @id @default(cuid())
+  userId      String
+  answer      Json     // User's answer
+  isCorrect   Boolean?
+  points      Float?   // Points earned
+  
+  // Relationships
+  questionId  String
+  question    Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  attemptId   String
+  attempt     AssessmentAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  
+  // Metadata
+  answeredAt  DateTime @default(now())
+  
+  @@unique([questionId, attemptId])
+  @@map("question_responses")
+}
+
+model Certificate {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  templateUrl String?
+  
+  // Recipient
+  userId      String
+  recipientName String
+  recipientEmail String
+  
+  // Achievement
+  achievementType AchievementType
+  resourceId      String // Course ID, Assessment ID, etc.
+  score           Float? // Final score
+  
+  // Certificate data
+  certificateNumber String @unique
+  issuedAt         DateTime @default(now())
+  expiresAt        DateTime?
+  
+  // Verification
+  verificationCode String @unique
+  isVerified       Boolean @default(true)
+  
+  // Relationships
+  organizationId   String
+  
+  // Metadata
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  @@map("certificates")
+}
+
+model Badge {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  iconUrl     String?
+  color       String?
+  
+  // Requirements
+  criteria    Json     // Badge earning criteria
+  
+  // Relationships
+  organizationId String
+  
+  // Earned badges
+  userBadges  UserBadge[]
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("badges")
+}
+
+model UserBadge {
+  id          String   @id @default(cuid())
+  userId      String
+  
+  // Achievement data
+  earnedAt    DateTime @default(now())
+  progress    Float?   // Progress towards badge (0-100)
+  
+  // Relationships
+  badgeId     String
+  badge       Badge    @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+  
+  @@unique([userId, badgeId])
+  @@map("user_badges")
+}
+
+enum AssessmentType {
+  QUIZ
+  EXAM
+  ASSIGNMENT
+  PROJECT
+  SURVEY
+}
+
+enum DifficultyLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+  SHORT_ANSWER
+  ESSAY
+  FILL_IN_BLANK
+  MATCHING
+  ORDERING
+}
+
+enum AttemptStatus {
+  IN_PROGRESS
+  SUBMITTED
+  GRADED
+  EXPIRED
+}
+
+enum AchievementType {
+  COURSE_COMPLETION
+  ASSESSMENT_PASS
+  PERFECT_SCORE
+  LEARNING_PATH_COMPLETION
+  STREAK_ACHIEVEMENT
+  SKILL_MASTERY
+}

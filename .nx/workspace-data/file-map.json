@@ -38,6 +38,321 @@
   ],
   "fileMap": {
     "projectFileMap": {
+      "shared-events": [
+        {
+          "file": "shared-events/README.md",
+          "hash": "6319701928536148615"
+        },
+        {
+          "file": "shared-events/eslint.config.mjs",
+          "hash": "9750370578825815921",
+          "deps": [
+            [
+              "npm:jsonc-eslint-parser",
+              "dynamic"
+            ]
+          ]
+        },
+        {
+          "file": "shared-events/jest.config.ts",
+          "hash": "1373197703795532571"
+        },
+        {
+          "file": "shared-events/package.json",
+          "hash": "12210639080202438232",
+          "deps": [
+            "npm:tslib"
+          ]
+        },
+        {
+          "file": "shared-events/project.json",
+          "hash": "9907490920308854378"
+        },
+        {
+          "file": "shared-events/src/index.ts",
+          "hash": "18038558279027754314"
+        },
+        {
+          "file": "shared-events/src/lib/shared-events.spec.ts",
+          "hash": "12481548783520939259"
+        },
+        {
+          "file": "shared-events/src/lib/shared-events.ts",
+          "hash": "13636770018842939015"
+        },
+        {
+          "file": "shared-events/tsconfig.json",
+          "hash": "10148903843036702529"
+        },
+        {
+          "file": "shared-events/tsconfig.lib.json",
+          "hash": "14539327243516648733"
+        },
+        {
+          "file": "shared-events/tsconfig.spec.json",
+          "hash": "5394994266788668641"
+        }
+      ],
+      "reporting-service": [
+        {
+          "file": "reporting-service/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "reporting-service/jest.config.ts",
+          "hash": "6682506116486808021"
+        },
+        {
+          "file": "reporting-service/project.json",
+          "hash": "5329119974314850820"
+        },
+        {
+          "file": "reporting-service/src/app/app.controller.spec.ts",
+          "hash": "7647647754668916054",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "reporting-service/src/app/app.controller.ts",
+          "hash": "15276891910009544695",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "reporting-service/src/app/app.module.ts",
+          "hash": "11673476679848632172",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "reporting-service/src/app/app.service.spec.ts",
+          "hash": "13111976464657524091",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "reporting-service/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "reporting-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "reporting-service/src/main.ts",
+          "hash": "150780270862474464",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "reporting-service/tsconfig.app.json",
+          "hash": "822438682748065338"
+        },
+        {
+          "file": "reporting-service/tsconfig.json",
+          "hash": "9420862676426701392"
+        },
+        {
+          "file": "reporting-service/tsconfig.spec.json",
+          "hash": "5394994266788668641"
+        },
+        {
+          "file": "reporting-service/webpack.config.js",
+          "hash": "5758481875577043647",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "content-service": [
+        {
+          "file": "content-service/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "content-service/jest.config.ts",
+          "hash": "13090559750966990034"
+        },
+        {
+          "file": "content-service/project.json",
+          "hash": "1086948458132709576"
+        },
+        {
+          "file": "content-service/src/app/app.controller.spec.ts",
+          "hash": "7647647754668916054",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "content-service/src/app/app.controller.ts",
+          "hash": "15276891910009544695",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "content-service/src/app/app.module.ts",
+          "hash": "11673476679848632172",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "content-service/src/app/app.service.spec.ts",
+          "hash": "13111976464657524091",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "content-service/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "content-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "content-service/src/main.ts",
+          "hash": "150780270862474464",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "content-service/tsconfig.app.json",
+          "hash": "822438682748065338"
+        },
+        {
+          "file": "content-service/tsconfig.json",
+          "hash": "9420862676426701392"
+        },
+        {
+          "file": "content-service/tsconfig.spec.json",
+          "hash": "5394994266788668641"
+        },
+        {
+          "file": "content-service/webpack.config.js",
+          "hash": "17509696215654002295",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "organization-service-e2e": [
+        {
+          "file": "organization-service-e2e/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "organization-service-e2e/jest.config.ts",
+          "hash": "8514077820485834133"
+        },
+        {
+          "file": "organization-service-e2e/project.json",
+          "hash": "13965430843570330666"
+        },
+        {
+          "file": "organization-service-e2e/src/organization-service/organization-service.spec.ts",
+          "hash": "110394728024017389",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "organization-service-e2e/src/support/global-setup.ts",
+          "hash": "10817858795115919263",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "organization-service-e2e/src/support/global-teardown.ts",
+          "hash": "14210317125869451873",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "organization-service-e2e/src/support/test-setup.ts",
+          "hash": "15521797170623961900",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "organization-service-e2e/tsconfig.json",
+          "hash": "2346920493880922870"
+        },
+        {
+          "file": "organization-service-e2e/tsconfig.spec.json",
+          "hash": "14226830188665428950"
+        }
+      ],
+      "auth-service-e2e": [
+        {
+          "file": "auth-service-e2e/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "auth-service-e2e/jest.config.ts",
+          "hash": "7264192784651186295"
+        },
+        {
+          "file": "auth-service-e2e/project.json",
+          "hash": "6848367987870728150"
+        },
+        {
+          "file": "auth-service-e2e/src/auth-service/auth-service.spec.ts",
+          "hash": "110394728024017389",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "auth-service-e2e/src/support/global-setup.ts",
+          "hash": "10817858795115919263",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "auth-service-e2e/src/support/global-teardown.ts",
+          "hash": "14210317125869451873",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "auth-service-e2e/src/support/test-setup.ts",
+          "hash": "15521797170623961900",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "auth-service-e2e/tsconfig.json",
+          "hash": "2346920493880922870"
+        },
+        {
+          "file": "auth-service-e2e/tsconfig.spec.json",
+          "hash": "14226830188665428950"
+        }
+      ],
       "api-gateway": [
         {
           "file": "apps/api-gateway/eslint.config.mjs",
@@ -118,6 +433,418 @@
           ]
         }
       ],
+      "user-service-e2e": [
+        {
+          "file": "user-service-e2e/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "user-service-e2e/jest.config.ts",
+          "hash": "13461887255002113600"
+        },
+        {
+          "file": "user-service-e2e/project.json",
+          "hash": "16589007968363295100"
+        },
+        {
+          "file": "user-service-e2e/src/support/global-setup.ts",
+          "hash": "10817858795115919263",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "user-service-e2e/src/support/global-teardown.ts",
+          "hash": "14210317125869451873",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "user-service-e2e/src/support/test-setup.ts",
+          "hash": "15521797170623961900",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "user-service-e2e/src/user-service/user-service.spec.ts",
+          "hash": "110394728024017389",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "user-service-e2e/tsconfig.json",
+          "hash": "2346920493880922870"
+        },
+        {
+          "file": "user-service-e2e/tsconfig.spec.json",
+          "hash": "14226830188665428950"
+        }
+      ],
+      "user-service": [
+        {
+          "file": "user-service/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "user-service/jest.config.ts",
+          "hash": "2138148436354458220"
+        },
+        {
+          "file": "user-service/prisma/migrations/migration_lock.toml",
+          "hash": "872437952673290735"
+        },
+        {
+          "file": "user-service/prisma/schema.prisma",
+          "hash": "2393526869011545281"
+        },
+        {
+          "file": "user-service/project.json",
+          "hash": "13090350095122001557"
+        },
+        {
+          "file": "user-service/schema.md",
+          "hash": "16418843368193835696"
+        },
+        {
+          "file": "user-service/src/app/app.controller.spec.ts",
+          "hash": "7647647754668916054",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "user-service/src/app/app.controller.ts",
+          "hash": "13834700168270105187",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/swagger"
+          ]
+        },
+        {
+          "file": "user-service/src/app/app.module.ts",
+          "hash": "9977033693501214869",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:@nestjs/jwt"
+          ]
+        },
+        {
+          "file": "user-service/src/app/app.service.spec.ts",
+          "hash": "13111976464657524091",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "user-service/src/app/app.service.ts",
+          "hash": "14535825382816354900",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "user-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "user-service/src/main.ts",
+          "hash": "12777429227462323682",
+          "deps": [
+            "npm:@nestjs/core",
+            "npm:@nestjs/common",
+            "npm:@nestjs/swagger"
+          ]
+        },
+        {
+          "file": "user-service/src/prisma/prisma.module.ts",
+          "hash": "8610797776889710892",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "user-service/src/prisma/prisma.service.ts",
+          "hash": "12078242808627897248",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "user-service/src/users/dto/create-user.dto.ts",
+          "hash": "8518347842665114074",
+          "deps": [
+            "npm:@nestjs/swagger",
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "user-service/src/users/dto/get-users-query.dto.ts",
+          "hash": "373366387313012365",
+          "deps": [
+            "npm:@nestjs/swagger",
+            "npm:class-validator",
+            "npm:class-transformer"
+          ]
+        },
+        {
+          "file": "user-service/src/users/dto/index.ts",
+          "hash": "9051988930346751687"
+        },
+        {
+          "file": "user-service/src/users/dto/update-profile.dto.ts",
+          "hash": "17264934440029107570",
+          "deps": [
+            "npm:@nestjs/swagger",
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "user-service/src/users/dto/update-user.dto.ts",
+          "hash": "7803476876227053488",
+          "deps": [
+            "npm:@nestjs/swagger",
+            "npm:class-validator"
+          ]
+        },
+        {
+          "file": "user-service/src/users/guards/jwt-auth.guard.ts",
+          "hash": "7144062615906432419",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/jwt",
+            "npm:express"
+          ]
+        },
+        {
+          "file": "user-service/src/users/users.controller.ts",
+          "hash": "16496080828688080921",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/platform-express",
+            "npm:@nestjs/swagger",
+            "npm:express"
+          ]
+        },
+        {
+          "file": "user-service/src/users/users.module.ts",
+          "hash": "11778382587662027504",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/jwt"
+          ]
+        },
+        {
+          "file": "user-service/src/users/users.service.ts",
+          "hash": "12919504011802449613",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:uuid"
+          ]
+        },
+        {
+          "file": "user-service/tsconfig.app.json",
+          "hash": "822438682748065338"
+        },
+        {
+          "file": "user-service/tsconfig.json",
+          "hash": "9420862676426701392"
+        },
+        {
+          "file": "user-service/tsconfig.spec.json",
+          "hash": "5394994266788668641"
+        },
+        {
+          "file": "user-service/webpack.config.js",
+          "hash": "6932769950938217690",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "assessment-service": [
+        {
+          "file": "assessment-service/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "assessment-service/jest.config.ts",
+          "hash": "16984544188994363195"
+        },
+        {
+          "file": "assessment-service/project.json",
+          "hash": "2437592411364249505"
+        },
+        {
+          "file": "assessment-service/src/app/app.controller.spec.ts",
+          "hash": "7647647754668916054",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "assessment-service/src/app/app.controller.ts",
+          "hash": "15276891910009544695",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "assessment-service/src/app/app.module.ts",
+          "hash": "11673476679848632172",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "assessment-service/src/app/app.service.spec.ts",
+          "hash": "13111976464657524091",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "assessment-service/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "assessment-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "assessment-service/src/main.ts",
+          "hash": "150780270862474464",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "assessment-service/tsconfig.app.json",
+          "hash": "822438682748065338"
+        },
+        {
+          "file": "assessment-service/tsconfig.json",
+          "hash": "9420862676426701392"
+        },
+        {
+          "file": "assessment-service/tsconfig.spec.json",
+          "hash": "5394994266788668641"
+        },
+        {
+          "file": "assessment-service/webpack.config.js",
+          "hash": "1896129883227210244",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "content-service-e2e": [
+        {
+          "file": "content-service-e2e/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "content-service-e2e/jest.config.ts",
+          "hash": "3368947544703250404"
+        },
+        {
+          "file": "content-service-e2e/project.json",
+          "hash": "12944505548468025958"
+        },
+        {
+          "file": "content-service-e2e/src/content-service/content-service.spec.ts",
+          "hash": "110394728024017389",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "content-service-e2e/src/support/global-setup.ts",
+          "hash": "10817858795115919263",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "content-service-e2e/src/support/global-teardown.ts",
+          "hash": "14210317125869451873",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "content-service-e2e/src/support/test-setup.ts",
+          "hash": "15521797170623961900",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "content-service-e2e/tsconfig.json",
+          "hash": "2346920493880922870"
+        },
+        {
+          "file": "content-service-e2e/tsconfig.spec.json",
+          "hash": "14226830188665428950"
+        }
+      ],
+      "learning-progress-service-e2e": [
+        {
+          "file": "learning-progress-service-e2e/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "learning-progress-service-e2e/jest.config.ts",
+          "hash": "3429448929000521689"
+        },
+        {
+          "file": "learning-progress-service-e2e/project.json",
+          "hash": "14969071160465895588"
+        },
+        {
+          "file": "learning-progress-service-e2e/src/learning-progress-service/learning-progress-service.spec.ts",
+          "hash": "110394728024017389",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "learning-progress-service-e2e/src/support/global-setup.ts",
+          "hash": "10817858795115919263",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "learning-progress-service-e2e/src/support/global-teardown.ts",
+          "hash": "14210317125869451873",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "learning-progress-service-e2e/src/support/test-setup.ts",
+          "hash": "15521797170623961900",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "learning-progress-service-e2e/tsconfig.json",
+          "hash": "2346920493880922870"
+        },
+        {
+          "file": "learning-progress-service-e2e/tsconfig.spec.json",
+          "hash": "14226830188665428950"
+        }
+      ],
       "shared-types": [
         {
           "file": "shared-types/README.md",
@@ -173,6 +900,270 @@
           "hash": "5394994266788668641"
         }
       ],
+      "api-gateway-e2e": [
+        {
+          "file": "apps/api-gateway-e2e/eslint.config.mjs",
+          "hash": "2624537849564014525"
+        },
+        {
+          "file": "apps/api-gateway-e2e/jest.config.ts",
+          "hash": "10937473195203449039"
+        },
+        {
+          "file": "apps/api-gateway-e2e/project.json",
+          "hash": "2360592405570751982"
+        },
+        {
+          "file": "apps/api-gateway-e2e/src/api-gateway/api-gateway.spec.ts",
+          "hash": "110394728024017389",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/api-gateway-e2e/src/support/global-setup.ts",
+          "hash": "10817858795115919263",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "apps/api-gateway-e2e/src/support/global-teardown.ts",
+          "hash": "14210317125869451873",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "apps/api-gateway-e2e/src/support/test-setup.ts",
+          "hash": "15521797170623961900",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/api-gateway-e2e/tsconfig.json",
+          "hash": "15443990093475294480"
+        },
+        {
+          "file": "apps/api-gateway-e2e/tsconfig.spec.json",
+          "hash": "14954872453723519891"
+        }
+      ],
+      "assessment-service-e2e": [
+        {
+          "file": "assessment-service-e2e/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "assessment-service-e2e/jest.config.ts",
+          "hash": "18102154374450016881"
+        },
+        {
+          "file": "assessment-service-e2e/project.json",
+          "hash": "4003221172346463752"
+        },
+        {
+          "file": "assessment-service-e2e/src/assessment-service/assessment-service.spec.ts",
+          "hash": "110394728024017389",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "assessment-service-e2e/src/support/global-setup.ts",
+          "hash": "10817858795115919263",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "assessment-service-e2e/src/support/global-teardown.ts",
+          "hash": "14210317125869451873",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "assessment-service-e2e/src/support/test-setup.ts",
+          "hash": "15521797170623961900",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "assessment-service-e2e/tsconfig.json",
+          "hash": "2346920493880922870"
+        },
+        {
+          "file": "assessment-service-e2e/tsconfig.spec.json",
+          "hash": "14226830188665428950"
+        }
+      ],
+      "organization-service": [
+        {
+          "file": "organization-service/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "organization-service/jest.config.ts",
+          "hash": "3348276876772116703"
+        },
+        {
+          "file": "organization-service/project.json",
+          "hash": "6697113245590878856"
+        },
+        {
+          "file": "organization-service/schema.md",
+          "hash": "14854193478592371128"
+        },
+        {
+          "file": "organization-service/src/app/app.controller.spec.ts",
+          "hash": "7647647754668916054",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "organization-service/src/app/app.controller.ts",
+          "hash": "15276891910009544695",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "organization-service/src/app/app.module.ts",
+          "hash": "11673476679848632172",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "organization-service/src/app/app.service.spec.ts",
+          "hash": "13111976464657524091",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "organization-service/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "organization-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "organization-service/src/main.ts",
+          "hash": "150780270862474464",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "organization-service/tsconfig.app.json",
+          "hash": "822438682748065338"
+        },
+        {
+          "file": "organization-service/tsconfig.json",
+          "hash": "9420862676426701392"
+        },
+        {
+          "file": "organization-service/tsconfig.spec.json",
+          "hash": "5394994266788668641"
+        },
+        {
+          "file": "organization-service/webpack.config.js",
+          "hash": "6198819693323478273",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "notification-service": [
+        {
+          "file": "notification-service/eslint.config.mjs",
+          "hash": "9036454466467975933"
+        },
+        {
+          "file": "notification-service/jest.config.ts",
+          "hash": "11804330638360894442"
+        },
+        {
+          "file": "notification-service/project.json",
+          "hash": "9156864715861311794"
+        },
+        {
+          "file": "notification-service/src/app/app.controller.spec.ts",
+          "hash": "7647647754668916054",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "notification-service/src/app/app.controller.ts",
+          "hash": "15276891910009544695",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "notification-service/src/app/app.module.ts",
+          "hash": "11673476679848632172",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "notification-service/src/app/app.service.spec.ts",
+          "hash": "13111976464657524091",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
+        },
+        {
+          "file": "notification-service/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "notification-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "notification-service/src/main.ts",
+          "hash": "150780270862474464",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
+        },
+        {
+          "file": "notification-service/tsconfig.app.json",
+          "hash": "822438682748065338"
+        },
+        {
+          "file": "notification-service/tsconfig.json",
+          "hash": "9420862676426701392"
+        },
+        {
+          "file": "notification-service/tsconfig.spec.json",
+          "hash": "5394994266788668641"
+        },
+        {
+          "file": "notification-service/webpack.config.js",
+          "hash": "14787940349172947222",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
       "auth-service": [
         {
           "file": "auth-service/eslint.config.mjs",
@@ -181,10 +1172,6 @@
         {
           "file": "auth-service/jest.config.ts",
           "hash": "7161005819022033757"
-        },
-        {
-          "file": "auth-service/prisma/migrations/20250808142554_init/migration.sql",
-          "hash": "6543236472803104151"
         },
         {
           "file": "auth-service/prisma/migrations/migration_lock.toml",
@@ -389,274 +1376,54 @@
           ]
         }
       ],
-      "organization-service": [
+      "notification-service-e2e": [
         {
-          "file": "organization-service/eslint.config.mjs",
+          "file": "notification-service-e2e/eslint.config.mjs",
           "hash": "9036454466467975933"
         },
         {
-          "file": "organization-service/jest.config.ts",
-          "hash": "3348276876772116703"
+          "file": "notification-service-e2e/jest.config.ts",
+          "hash": "10535396192415128105"
         },
         {
-          "file": "organization-service/project.json",
-          "hash": "6697113245590878856"
+          "file": "notification-service-e2e/project.json",
+          "hash": "2578979239836041631"
         },
         {
-          "file": "organization-service/schema.md",
-          "hash": "14854193478592371128"
-        },
-        {
-          "file": "organization-service/src/app/app.controller.spec.ts",
-          "hash": "7647647754668916054",
+          "file": "notification-service-e2e/src/notification-service/notification-service.spec.ts",
+          "hash": "110394728024017389",
           "deps": [
-            "npm:@nestjs/testing"
+            "npm:axios"
           ]
         },
         {
-          "file": "organization-service/src/app/app.controller.ts",
-          "hash": "15276891910009544695",
+          "file": "notification-service-e2e/src/support/global-setup.ts",
+          "hash": "10817858795115919263",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nx/node"
           ]
         },
         {
-          "file": "organization-service/src/app/app.module.ts",
-          "hash": "11673476679848632172",
+          "file": "notification-service-e2e/src/support/global-teardown.ts",
+          "hash": "14210317125869451873",
           "deps": [
-            "npm:@nestjs/common"
+            "npm:@nx/node"
           ]
         },
         {
-          "file": "organization-service/src/app/app.service.spec.ts",
-          "hash": "13111976464657524091",
+          "file": "notification-service-e2e/src/support/test-setup.ts",
+          "hash": "15521797170623961900",
           "deps": [
-            "npm:@nestjs/testing"
+            "npm:axios"
           ]
         },
         {
-          "file": "organization-service/src/app/app.service.ts",
-          "hash": "9967902337593410053",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
+          "file": "notification-service-e2e/tsconfig.json",
+          "hash": "2346920493880922870"
         },
         {
-          "file": "organization-service/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "organization-service/src/main.ts",
-          "hash": "150780270862474464",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/core"
-          ]
-        },
-        {
-          "file": "organization-service/tsconfig.app.json",
-          "hash": "822438682748065338"
-        },
-        {
-          "file": "organization-service/tsconfig.json",
-          "hash": "9420862676426701392"
-        },
-        {
-          "file": "organization-service/tsconfig.spec.json",
-          "hash": "5394994266788668641"
-        },
-        {
-          "file": "organization-service/webpack.config.js",
-          "hash": "6198819693323478273",
-          "deps": [
-            "npm:@nx/webpack"
-          ]
-        }
-      ],
-      "user-service": [
-        {
-          "file": "user-service/eslint.config.mjs",
-          "hash": "9036454466467975933"
-        },
-        {
-          "file": "user-service/jest.config.ts",
-          "hash": "2138148436354458220"
-        },
-        {
-          "file": "user-service/prisma/migrations/20250808142620_init/migration.sql",
-          "hash": "7946063966597355789"
-        },
-        {
-          "file": "user-service/prisma/migrations/migration_lock.toml",
-          "hash": "872437952673290735"
-        },
-        {
-          "file": "user-service/prisma/schema.prisma",
-          "hash": "2393526869011545281"
-        },
-        {
-          "file": "user-service/project.json",
-          "hash": "13090350095122001557"
-        },
-        {
-          "file": "user-service/schema.md",
-          "hash": "16418843368193835696"
-        },
-        {
-          "file": "user-service/src/app/app.controller.spec.ts",
-          "hash": "7647647754668916054",
-          "deps": [
-            "npm:@nestjs/testing"
-          ]
-        },
-        {
-          "file": "user-service/src/app/app.controller.ts",
-          "hash": "13834700168270105187",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/swagger"
-          ]
-        },
-        {
-          "file": "user-service/src/app/app.module.ts",
-          "hash": "9977033693501214869",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/config",
-            "npm:@nestjs/jwt"
-          ]
-        },
-        {
-          "file": "user-service/src/app/app.service.spec.ts",
-          "hash": "13111976464657524091",
-          "deps": [
-            "npm:@nestjs/testing"
-          ]
-        },
-        {
-          "file": "user-service/src/app/app.service.ts",
-          "hash": "14535825382816354900",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "user-service/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "user-service/src/main.ts",
-          "hash": "12777429227462323682",
-          "deps": [
-            "npm:@nestjs/core",
-            "npm:@nestjs/common",
-            "npm:@nestjs/swagger"
-          ]
-        },
-        {
-          "file": "user-service/src/prisma/prisma.module.ts",
-          "hash": "8610797776889710892",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "user-service/src/prisma/prisma.service.ts",
-          "hash": "12078242808627897248",
-          "deps": [
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "user-service/src/users/dto/create-user.dto.ts",
-          "hash": "8518347842665114074",
-          "deps": [
-            "npm:@nestjs/swagger",
-            "npm:class-validator"
-          ]
-        },
-        {
-          "file": "user-service/src/users/dto/get-users-query.dto.ts",
-          "hash": "373366387313012365",
-          "deps": [
-            "npm:@nestjs/swagger",
-            "npm:class-validator",
-            "npm:class-transformer"
-          ]
-        },
-        {
-          "file": "user-service/src/users/dto/index.ts",
-          "hash": "9051988930346751687"
-        },
-        {
-          "file": "user-service/src/users/dto/update-profile.dto.ts",
-          "hash": "17264934440029107570",
-          "deps": [
-            "npm:@nestjs/swagger",
-            "npm:class-validator"
-          ]
-        },
-        {
-          "file": "user-service/src/users/dto/update-user.dto.ts",
-          "hash": "7803476876227053488",
-          "deps": [
-            "npm:@nestjs/swagger",
-            "npm:class-validator"
-          ]
-        },
-        {
-          "file": "user-service/src/users/guards/jwt-auth.guard.ts",
-          "hash": "7144062615906432419",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/jwt",
-            "npm:express"
-          ]
-        },
-        {
-          "file": "user-service/src/users/users.controller.ts",
-          "hash": "16496080828688080921",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/platform-express",
-            "npm:@nestjs/swagger",
-            "npm:express"
-          ]
-        },
-        {
-          "file": "user-service/src/users/users.module.ts",
-          "hash": "11778382587662027504",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/jwt"
-          ]
-        },
-        {
-          "file": "user-service/src/users/users.service.ts",
-          "hash": "12919504011802449613",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:uuid"
-          ]
-        },
-        {
-          "file": "user-service/tsconfig.app.json",
-          "hash": "822438682748065338"
-        },
-        {
-          "file": "user-service/tsconfig.json",
-          "hash": "9420862676426701392"
-        },
-        {
-          "file": "user-service/tsconfig.spec.json",
-          "hash": "5394994266788668641"
-        },
-        {
-          "file": "user-service/webpack.config.js",
-          "hash": "6932769950938217690",
-          "deps": [
-            "npm:@nx/webpack"
-          ]
+          "file": "notification-service-e2e/tsconfig.spec.json",
+          "hash": "14226830188665428950"
         }
       ],
       "shared-utils": [
@@ -717,259 +1484,134 @@
           "hash": "5394994266788668641"
         }
       ],
-      "user-service-e2e": [
+      "reporting-service-e2e": [
         {
-          "file": "user-service-e2e/eslint.config.mjs",
+          "file": "reporting-service-e2e/eslint.config.mjs",
           "hash": "9036454466467975933"
         },
         {
-          "file": "user-service-e2e/jest.config.ts",
-          "hash": "13461887255002113600"
+          "file": "reporting-service-e2e/jest.config.ts",
+          "hash": "15298038828328383411"
         },
         {
-          "file": "user-service-e2e/project.json",
-          "hash": "16589007968363295100"
+          "file": "reporting-service-e2e/project.json",
+          "hash": "18081394214977432435"
         },
         {
-          "file": "user-service-e2e/src/support/global-setup.ts",
-          "hash": "10817858795115919263",
-          "deps": [
-            "npm:@nx/node"
-          ]
-        },
-        {
-          "file": "user-service-e2e/src/support/global-teardown.ts",
-          "hash": "14210317125869451873",
-          "deps": [
-            "npm:@nx/node"
-          ]
-        },
-        {
-          "file": "user-service-e2e/src/support/test-setup.ts",
-          "hash": "15521797170623961900",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "user-service-e2e/src/user-service/user-service.spec.ts",
+          "file": "reporting-service-e2e/src/reporting-service/reporting-service.spec.ts",
           "hash": "110394728024017389",
           "deps": [
             "npm:axios"
           ]
         },
         {
-          "file": "user-service-e2e/tsconfig.json",
+          "file": "reporting-service-e2e/src/support/global-setup.ts",
+          "hash": "10817858795115919263",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "reporting-service-e2e/src/support/global-teardown.ts",
+          "hash": "14210317125869451873",
+          "deps": [
+            "npm:@nx/node"
+          ]
+        },
+        {
+          "file": "reporting-service-e2e/src/support/test-setup.ts",
+          "hash": "15521797170623961900",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "reporting-service-e2e/tsconfig.json",
           "hash": "2346920493880922870"
         },
         {
-          "file": "user-service-e2e/tsconfig.spec.json",
+          "file": "reporting-service-e2e/tsconfig.spec.json",
           "hash": "14226830188665428950"
         }
       ],
-      "shared-events": [
+      "learning-progress-service": [
         {
-          "file": "shared-events/README.md",
-          "hash": "6319701928536148615"
+          "file": "learning-progress-service/eslint.config.mjs",
+          "hash": "9036454466467975933"
         },
         {
-          "file": "shared-events/eslint.config.mjs",
-          "hash": "9750370578825815921",
+          "file": "learning-progress-service/jest.config.ts",
+          "hash": "4243928647879000906"
+        },
+        {
+          "file": "learning-progress-service/project.json",
+          "hash": "12176762783715053438"
+        },
+        {
+          "file": "learning-progress-service/src/app/app.controller.spec.ts",
+          "hash": "7647647754668916054",
           "deps": [
-            [
-              "npm:jsonc-eslint-parser",
-              "dynamic"
-            ]
+            "npm:@nestjs/testing"
           ]
         },
         {
-          "file": "shared-events/jest.config.ts",
-          "hash": "1373197703795532571"
-        },
-        {
-          "file": "shared-events/package.json",
-          "hash": "12210639080202438232",
+          "file": "learning-progress-service/src/app/app.controller.ts",
+          "hash": "15276891910009544695",
           "deps": [
-            "npm:tslib"
+            "npm:@nestjs/common"
           ]
         },
         {
-          "file": "shared-events/project.json",
-          "hash": "9907490920308854378"
+          "file": "learning-progress-service/src/app/app.module.ts",
+          "hash": "11673476679848632172",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
-          "file": "shared-events/src/index.ts",
-          "hash": "18038558279027754314"
+          "file": "learning-progress-service/src/app/app.service.spec.ts",
+          "hash": "13111976464657524091",
+          "deps": [
+            "npm:@nestjs/testing"
+          ]
         },
         {
-          "file": "shared-events/src/lib/shared-events.spec.ts",
-          "hash": "12481548783520939259"
+          "file": "learning-progress-service/src/app/app.service.ts",
+          "hash": "9967902337593410053",
+          "deps": [
+            "npm:@nestjs/common"
+          ]
         },
         {
-          "file": "shared-events/src/lib/shared-events.ts",
-          "hash": "13636770018842939015"
+          "file": "learning-progress-service/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
         },
         {
-          "file": "shared-events/tsconfig.json",
-          "hash": "10148903843036702529"
+          "file": "learning-progress-service/src/main.ts",
+          "hash": "150780270862474464",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core"
+          ]
         },
         {
-          "file": "shared-events/tsconfig.lib.json",
-          "hash": "14539327243516648733"
+          "file": "learning-progress-service/tsconfig.app.json",
+          "hash": "822438682748065338"
         },
         {
-          "file": "shared-events/tsconfig.spec.json",
+          "file": "learning-progress-service/tsconfig.json",
+          "hash": "9420862676426701392"
+        },
+        {
+          "file": "learning-progress-service/tsconfig.spec.json",
           "hash": "5394994266788668641"
-        }
-      ],
-      "api-gateway-e2e": [
-        {
-          "file": "apps/api-gateway-e2e/eslint.config.mjs",
-          "hash": "2624537849564014525"
         },
         {
-          "file": "apps/api-gateway-e2e/jest.config.ts",
-          "hash": "10937473195203449039"
-        },
-        {
-          "file": "apps/api-gateway-e2e/project.json",
-          "hash": "2360592405570751982"
-        },
-        {
-          "file": "apps/api-gateway-e2e/src/api-gateway/api-gateway.spec.ts",
-          "hash": "110394728024017389",
+          "file": "learning-progress-service/webpack.config.js",
+          "hash": "10965957223658919754",
           "deps": [
-            "npm:axios"
+            "npm:@nx/webpack"
           ]
-        },
-        {
-          "file": "apps/api-gateway-e2e/src/support/global-setup.ts",
-          "hash": "10817858795115919263",
-          "deps": [
-            "npm:@nx/node"
-          ]
-        },
-        {
-          "file": "apps/api-gateway-e2e/src/support/global-teardown.ts",
-          "hash": "14210317125869451873",
-          "deps": [
-            "npm:@nx/node"
-          ]
-        },
-        {
-          "file": "apps/api-gateway-e2e/src/support/test-setup.ts",
-          "hash": "15521797170623961900",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "apps/api-gateway-e2e/tsconfig.json",
-          "hash": "15443990093475294480"
-        },
-        {
-          "file": "apps/api-gateway-e2e/tsconfig.spec.json",
-          "hash": "14954872453723519891"
-        }
-      ],
-      "organization-service-e2e": [
-        {
-          "file": "organization-service-e2e/eslint.config.mjs",
-          "hash": "9036454466467975933"
-        },
-        {
-          "file": "organization-service-e2e/jest.config.ts",
-          "hash": "8514077820485834133"
-        },
-        {
-          "file": "organization-service-e2e/project.json",
-          "hash": "13965430843570330666"
-        },
-        {
-          "file": "organization-service-e2e/src/organization-service/organization-service.spec.ts",
-          "hash": "110394728024017389",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "organization-service-e2e/src/support/global-setup.ts",
-          "hash": "10817858795115919263",
-          "deps": [
-            "npm:@nx/node"
-          ]
-        },
-        {
-          "file": "organization-service-e2e/src/support/global-teardown.ts",
-          "hash": "14210317125869451873",
-          "deps": [
-            "npm:@nx/node"
-          ]
-        },
-        {
-          "file": "organization-service-e2e/src/support/test-setup.ts",
-          "hash": "15521797170623961900",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "organization-service-e2e/tsconfig.json",
-          "hash": "2346920493880922870"
-        },
-        {
-          "file": "organization-service-e2e/tsconfig.spec.json",
-          "hash": "14226830188665428950"
-        }
-      ],
-      "auth-service-e2e": [
-        {
-          "file": "auth-service-e2e/eslint.config.mjs",
-          "hash": "9036454466467975933"
-        },
-        {
-          "file": "auth-service-e2e/jest.config.ts",
-          "hash": "7264192784651186295"
-        },
-        {
-          "file": "auth-service-e2e/project.json",
-          "hash": "6848367987870728150"
-        },
-        {
-          "file": "auth-service-e2e/src/auth-service/auth-service.spec.ts",
-          "hash": "110394728024017389",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "auth-service-e2e/src/support/global-setup.ts",
-          "hash": "10817858795115919263",
-          "deps": [
-            "npm:@nx/node"
-          ]
-        },
-        {
-          "file": "auth-service-e2e/src/support/global-teardown.ts",
-          "hash": "14210317125869451873",
-          "deps": [
-            "npm:@nx/node"
-          ]
-        },
-        {
-          "file": "auth-service-e2e/src/support/test-setup.ts",
-          "hash": "15521797170623961900",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "auth-service-e2e/tsconfig.json",
-          "hash": "2346920493880922870"
-        },
-        {
-          "file": "auth-service-e2e/tsconfig.spec.json",
-          "hash": "14226830188665428950"
         }
       ]
     },
@@ -979,12 +1621,12 @@
         "hash": "5443105041930014821"
       },
       {
-        "file": ".env",
+        "file": ".env.example",
         "hash": "7539527401419399494"
       },
       {
         "file": ".gitignore",
-        "hash": "18435103667633526488"
+        "hash": "12570159840149178450"
       },
       {
         "file": ".prettierignore",
@@ -995,20 +1637,20 @@
         "hash": "16267754514737964994"
       },
       {
-        "file": ".vscode/extensions.json",
-        "hash": "4637156562308165301"
+        "file": "DEPLOYMENT.md",
+        "hash": "4346333177408162875"
+      },
+      {
+        "file": "GITHUB_SETUP.md",
+        "hash": "7310868804114031168"
       },
       {
         "file": "README.md",
-        "hash": "13056893220466795989"
+        "hash": "1251478469508119536"
       },
       {
         "file": "docker-compose.dev.yml",
         "hash": "10007635904374013665"
-      },
-      {
-        "file": "error.log",
-        "hash": "5474476955441167314"
       },
       {
         "file": "eslint.config.mjs",
@@ -1024,7 +1666,7 @@
       },
       {
         "file": "nx.json",
-        "hash": "13450551806179570471"
+        "hash": "16574379656850934633"
       },
       {
         "file": "package-lock.json",
@@ -1041,6 +1683,10 @@
       {
         "file": "subscription-service/schema.md",
         "hash": "2383557843622694460"
+      },
+      {
+        "file": "test-services.sh",
+        "hash": "4794457322537307948"
       },
       {
         "file": "tsconfig.base.json",

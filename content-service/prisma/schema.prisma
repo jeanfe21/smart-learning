@@ -1,0 +1,154 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@prisma/content_client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("CONTENT_SERVICE_DATABASE_URL")
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  thumbnail   String?
+  status      CourseStatus @default(DRAFT)
+  difficulty  DifficultyLevel
+  duration    Int      // in minutes
+  price       Decimal? @db.Decimal(10,2)
+  
+  // Relationships
+  organizationId String
+  instructorId   String
+  categoryId     String?
+  
+  // Content
+  lessons     Lesson[]
+  materials   CourseMaterial[]
+  tags        CourseTag[]
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  publishedAt DateTime?
+  
+  @@map("courses")
+}
+
+model Lesson {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  content     String   // Rich text content
+  videoUrl    String?
+  duration    Int      // in minutes
+  order       Int
+  
+  // Relationships
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  // Content
+  materials   LessonMaterial[]
+  quizzes     LessonQuiz[]
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("lessons")
+}
+
+model CourseMaterial {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        MaterialType
+  url         String
+  fileSize    Int?     // in bytes
+  mimeType    String?
+  
+  // Relationships
+  courseId    String
+  course      Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("course_materials")
+}
+
+model LessonMaterial {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  type        MaterialType
+  url         String
+  fileSize    Int?
+  mimeType    String?
+  
+  // Relationships
+  lessonId    String
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("lesson_materials")
+}
+
+model CourseTag {
+  id       String @id @default(cuid())
+  name     String @unique
+  color    String?
+  
+  // Relationships
+  courses  Course[]
+  
+  @@map("course_tags")
+}
+
+model LessonQuiz {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  questions   Json     // Array of quiz questions
+  passingScore Int     @default(70)
+  timeLimit   Int?     // in minutes
+  
+  // Relationships
+  lessonId    String
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("lesson_quizzes")
+}
+
+enum CourseStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum DifficultyLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum MaterialType {
+  PDF
+  VIDEO
+  AUDIO
+  IMAGE
+  DOCUMENT
+  LINK
+  ARCHIVE
+}

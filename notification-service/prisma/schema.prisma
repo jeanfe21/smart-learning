@@ -1,0 +1,253 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@prisma/notification_client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("NOTIFICATION_SERVICE_DATABASE_URL")
+}
+
+model NotificationTemplate {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  type        NotificationType
+  channel     NotificationChannel
+  
+  // Template content
+  subject     String?  // For email
+  title       String?  // For push notifications
+  body        String   // Template body with variables
+  htmlBody    String?  // HTML version for email
+  
+  // Configuration
+  isActive    Boolean  @default(true)
+  variables   Json?    // Available template variables
+  
+  // Relationships
+  organizationId String?
+  
+  // Usage
+  notifications Notification[]
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("notification_templates")
+}
+
+model Notification {
+  id          String   @id @default(cuid())
+  type        NotificationType
+  channel     NotificationChannel
+  status      NotificationStatus @default(PENDING)
+  
+  // Recipient
+  userId      String?
+  email       String?
+  phoneNumber String?
+  deviceToken String?
+  
+  // Content
+  subject     String?
+  title       String?
+  body        String
+  htmlBody    String?
+  data        Json?    // Additional data for push notifications
+  
+  // Delivery
+  scheduledAt DateTime?
+  sentAt      DateTime?
+  deliveredAt DateTime?
+  readAt      DateTime?
+  
+  // Error handling
+  attempts    Int      @default(0)
+  maxAttempts Int      @default(3)
+  lastError   String?
+  
+  // Relationships
+  templateId  String?
+  template    NotificationTemplate? @relation(fields: [templateId], references: [id])
+  organizationId String?
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("notifications")
+}
+
+model NotificationPreference {
+  id          String   @id @default(cuid())
+  userId      String
+  type        NotificationType
+  
+  // Channel preferences
+  emailEnabled Boolean  @default(true)
+  pushEnabled  Boolean  @default(true)
+  smsEnabled   Boolean  @default(false)
+  
+  // Timing preferences
+  quietHoursStart String? // HH:MM format
+  quietHoursEnd   String? // HH:MM format
+  timezone        String?
+  
+  // Frequency preferences
+  frequency   NotificationFrequency @default(IMMEDIATE)
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([userId, type])
+  @@map("notification_preferences")
+}
+
+model EmailCampaign {
+  id          String   @id @default(cuid())
+  name        String
+  subject     String
+  body        String
+  htmlBody    String?
+  
+  // Targeting
+  targetAudience Json   // Criteria for recipient selection
+  
+  // Scheduling
+  scheduledAt DateTime?
+  sentAt      DateTime?
+  
+  // Status
+  status      CampaignStatus @default(DRAFT)
+  
+  // Statistics
+  totalRecipients Int    @default(0)
+  sentCount       Int    @default(0)
+  deliveredCount  Int    @default(0)
+  openedCount     Int    @default(0)
+  clickedCount    Int    @default(0)
+  
+  // Relationships
+  organizationId  String
+  creatorId       String
+  
+  // Campaign sends
+  campaignSends   CampaignSend[]
+  
+  // Metadata
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@map("email_campaigns")
+}
+
+model CampaignSend {
+  id          String   @id @default(cuid())
+  userId      String
+  email       String
+  status      SendStatus @default(PENDING)
+  
+  // Tracking
+  sentAt      DateTime?
+  deliveredAt DateTime?
+  openedAt    DateTime?
+  clickedAt   DateTime?
+  
+  // Error handling
+  errorMessage String?
+  
+  // Relationships
+  campaignId  String
+  campaign    EmailCampaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([campaignId, userId])
+  @@map("campaign_sends")
+}
+
+model NotificationLog {
+  id          String   @id @default(cuid())
+  type        NotificationType
+  channel     NotificationChannel
+  status      NotificationStatus
+  
+  // Recipient
+  userId      String?
+  recipient   String   // Email, phone, or device token
+  
+  // Content summary
+  subject     String?
+  
+  // Delivery info
+  sentAt      DateTime?
+  deliveredAt DateTime?
+  
+  // Error info
+  errorMessage String?
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  
+  @@map("notification_logs")
+}
+
+enum NotificationType {
+  WELCOME
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+  COURSE_ENROLLMENT
+  LESSON_COMPLETION
+  ASSESSMENT_COMPLETED
+  CERTIFICATE_EARNED
+  BADGE_EARNED
+  REMINDER
+  ANNOUNCEMENT
+  SYSTEM_ALERT
+  MARKETING
+}
+
+enum NotificationChannel {
+  EMAIL
+  PUSH
+  SMS
+  IN_APP
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  DELIVERED
+  READ
+  FAILED
+  CANCELLED
+}
+
+enum NotificationFrequency {
+  IMMEDIATE
+  HOURLY
+  DAILY
+  WEEKLY
+  NEVER
+}
+
+enum CampaignStatus {
+  DRAFT
+  SCHEDULED
+  SENDING
+  SENT
+  CANCELLED
+}
+
+enum SendStatus {
+  PENDING
+  SENT
+  DELIVERED
+  OPENED
+  CLICKED
+  FAILED
+}

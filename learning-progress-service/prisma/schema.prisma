@@ -1,0 +1,208 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/@prisma/learning_progress_client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("LEARNING_PROGRESS_SERVICE_DATABASE_URL")
+}
+
+model LearningPath {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  difficulty  DifficultyLevel
+  estimatedHours Int
+  
+  // Relationships
+  organizationId String
+  creatorId      String
+  
+  // Content
+  steps       LearningPathStep[]
+  enrollments LearningPathEnrollment[]
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("learning_paths")
+}
+
+model LearningPathStep {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  order       Int
+  type        StepType
+  resourceId  String   // Course ID, Assessment ID, etc.
+  isRequired  Boolean  @default(true)
+  
+  // Relationships
+  pathId      String
+  path        LearningPath @relation(fields: [pathId], references: [id], onDelete: Cascade)
+  
+  // Progress tracking
+  completions StepCompletion[]
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("learning_path_steps")
+}
+
+model LearningPathEnrollment {
+  id          String   @id @default(cuid())
+  userId      String
+  status      EnrollmentStatus @default(ACTIVE)
+  progress    Float    @default(0) // 0-100
+  
+  // Relationships
+  pathId      String
+  path        LearningPath @relation(fields: [pathId], references: [id], onDelete: Cascade)
+  
+  // Progress tracking
+  stepCompletions StepCompletion[]
+  
+  // Metadata
+  enrolledAt  DateTime @default(now())
+  completedAt DateTime?
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([userId, pathId])
+  @@map("learning_path_enrollments")
+}
+
+model StepCompletion {
+  id          String   @id @default(cuid())
+  userId      String
+  status      CompletionStatus @default(IN_PROGRESS)
+  score       Float?   // 0-100
+  timeSpent   Int?     // in minutes
+  
+  // Relationships
+  stepId      String
+  step        LearningPathStep @relation(fields: [stepId], references: [id], onDelete: Cascade)
+  enrollmentId String
+  enrollment  LearningPathEnrollment @relation(fields: [enrollmentId], references: [id], onDelete: Cascade)
+  
+  // Metadata
+  startedAt   DateTime @default(now())
+  completedAt DateTime?
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([userId, stepId])
+  @@map("step_completions")
+}
+
+model UserProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  resourceType ResourceType
+  resourceId  String
+  progress    Float    @default(0) // 0-100
+  status      ProgressStatus @default(NOT_STARTED)
+  
+  // Time tracking
+  timeSpent   Int      @default(0) // in minutes
+  lastAccessed DateTime @default(now())
+  
+  // Completion tracking
+  completedAt DateTime?
+  score       Float?   // 0-100
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([userId, resourceType, resourceId])
+  @@map("user_progress")
+}
+
+model LearningSession {
+  id          String   @id @default(cuid())
+  userId      String
+  resourceType ResourceType
+  resourceId  String
+  duration    Int      // in minutes
+  
+  // Session data
+  startTime   DateTime
+  endTime     DateTime?
+  isCompleted Boolean  @default(false)
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  
+  @@map("learning_sessions")
+}
+
+model LearningAnalytics {
+  id          String   @id @default(cuid())
+  userId      String
+  date        DateTime @db.Date
+  
+  // Daily metrics
+  timeSpent   Int      @default(0) // in minutes
+  coursesAccessed Int  @default(0)
+  lessonsCompleted Int @default(0)
+  quizzesCompleted Int @default(0)
+  averageScore Float?
+  
+  // Streak tracking
+  streakDays  Int      @default(0)
+  
+  // Metadata
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([userId, date])
+  @@map("learning_analytics")
+}
+
+enum DifficultyLevel {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+  EXPERT
+}
+
+enum StepType {
+  COURSE
+  ASSESSMENT
+  PROJECT
+  READING
+  VIDEO
+  EXTERNAL_LINK
+}
+
+enum EnrollmentStatus {
+  ACTIVE
+  PAUSED
+  COMPLETED
+  CANCELLED
+}
+
+enum CompletionStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+enum ResourceType {
+  COURSE
+  LESSON
+  QUIZ
+  ASSESSMENT
+  PROJECT
+}
+
+enum ProgressStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
